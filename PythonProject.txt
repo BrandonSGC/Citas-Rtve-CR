@@ -1,0 +1,94 @@
+Citas RTVE	-	Object Oriented Programming Project
+
+- Save data in files
+- Be able to Save, Show, Modify, Delete
+
+
+Costos:
+Nota: Podriamos hacerlo con un diccionario, donde la llave es el vehiculo y tiene asignado su valor en colones.
+- Motorcycles = c8010
+- Cars = c12150
+- Carga Liviana = c12150
+- Trucks(Carga Pesada) = c16015
+- Bus = c16015
+- Taxis = c13025 (Should go twice a year)
+
+Datos:
+- Stations (Places):
+a) Horario Lunes a Sabados de 6a.m a 9pm
+Alajuela, Heredia, SJN (Sto Domingo), Cartago, SJS (Alajuelita), Perez Zeledon, San Carlos, Puntarenas, Guapiles Limon, Nicoya, Movil Sur, Movil 4.
+
+b) Horario Lunes a Sabados de 6a.m a 6pm
+Liberia, Canas, Movil Norte
+
+c) Horario Lunes a Sabados de 8a.m a 5pm
+Movil Central
+
+
+- Placa
+- Telefono
+- Correo
+- Estacion
+- Dia
+- Hora
+- Tipo de vehiculo
+- Nombre y Apellidos
+
+Yo, "Brandon Gomez" con cedula: "117970823", autorizo el uso del numero celular y/o el correo electronico a Riteve para el envio de informacion referente a la revision tencnica vehicular
+
+
+General Information
+
+=================
+#    Riteve     #
+=================
+Nombre: Brandon Gomez
+Cedula: 117970823
+Placa: BGC020
+Fecha: 23/09/22 5:00p.m
+Estacion: SJO (Alajuelita)
+Contacto: bransti20@gmail.com / 70428451
+Tipo de vehiculo: Vehiculo Liviano
+Monto a pagar: c12500
+______________________________________________________________________________
+
+Clases:
+- Cita:
+	Atributos:
+	- Placa
+	- Telefono
+	- Correo
+	- Estacion
+	- Dia
+	- Hora
+	- Tipo de vehiculo
+	- Nombre y Apellidos
+
+	Metotods:
+	
+	
+
+Pantallas:
+1- Nueva Cita
+2- Mostrar Citas
+3- Modificar Citas
+4- Eliminar Citas
+
+
+
+
+
+
+
+
+
+
+
+
+
+Atributos por omision:
+placa=None, telefono=None, correo=None, estacion=None,
+     fecha=None, hora=None, vehiculo=None,nombre=None,apellidos=None, cedula=None,
+     monto=None
+
+

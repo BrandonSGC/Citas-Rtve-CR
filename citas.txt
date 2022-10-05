@@ -1,0 +1,5 @@
+Brandon;Gomez Carvajal;117970823;BGC020;2022-09-29;10:10:07;Alajuelita;bransti20@gmail.com;70428451;12150
+Carlos;Gomez;123456789;9822323;2022-09-29;12:14:52;Liberia;cargb11@gmail.com;88248009;12150
+Keylin;Gomez Carvajal;12312412;872132;2022-09-29;12:14:52;Heredia;keygb11@hotmail.com;70611250;16015
+Maria;Carvajal Ramirez;123455434;938234;2022-09-29;14:26:49;San Carlos;mar.yb.k@hotmail.com;86760010;12150
+Ana;Bermudez Rojas;123344212;944832;2022-09-30;11:16:17;Perez Zeledon;anapau\2gmail.com;86866437;8010
