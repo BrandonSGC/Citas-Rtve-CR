@@ -1,4 +1,3 @@
-# Bibliotecas
 import os
 import datetime
 import time
@@ -19,10 +18,8 @@ vehiculos = {"Motocicleta":8010, "Automovil":12150, "Carga Liviana":12150,
         "Carga Pesada":16015, "Bus":16015, "Taxi":13025}
         
 class Persona:
-    #Constructor
     def __init__(self, nombre = None, apellidos = None, cedula = None,
         correo = None, telefono = None):
-        #Atributos
         self.nombre = nombre
         self.apellidos = apellidos
         self.cedula = correo
@@ -33,7 +30,6 @@ class Cita(Persona):
     def __init__(self, placa = None, fecha = None, hora = None,
         estacion = None, vehiculo = None, monto = None):
         super().__init__()
-        #Atributos
         self.placa = placa
         self.fecha = fecha
         self.hora = hora
@@ -66,6 +62,7 @@ class Cita(Persona):
         # Imprimimos las key(Vehiculos) con sus valores(costo)
         for vehiculo, costo in vehiculos.items():
             print(f"{vehiculo} = c{costo}")
+
 
     #Metodo que muestra el calendario
     def mostrar_calendario(self):
@@ -101,28 +98,30 @@ class Cita(Persona):
             else:
                 os.system("cls")
                 print(f"Debe aceptar los terminos para continuar.")   
-                time.sleep(1.4) 
+                input("'nPresione enter para continuar...")
         input("Presione enter para continuar...")
 
 
     def escribir_txt(self):
         with open("citas.txt", "a") as archivo:
-            archivo.write(f"{self.cedula};{self.nombre};{self.apellidos};{self.placa};{self.fecha};{self.hora};{self.estacion};{self.correo};{self.telefono};{self.monto}\n")
+            archivo.write(f"{self.cedula};{self.nombre};{self.apellidos};\
+{self.placa};{self.fecha};{self.hora};{self.estacion};{self.correo};\
+{self.telefono};{self.monto}\n")
 
 
     def mostrar_citas(self):
         with open("citas.txt", "r") as archivo:
-            #Readlines nos genera una lista con las lineas del archivo
+            #Generamos una lista con las lineas del archivo con
+            # el metodo readlines(),
             lineas = archivo.readlines()
             #Ordenamos la lista
             lineas.sort()
             linea = archivo.readline()
-            #Por cada linea en la lista lineas
             cont = 0
+            #Por cada linea en la lista lineas
             for linea in lineas:
                 cont += 1
-                '''El metodo split nos genera un array con el separador
-                que le mandemos por parametro, en este caso ";" '''
+                #Creamos lista con el metodo split().
                 atributos = linea.split(";")
                 print(f"Cita #{cont}")
                 print(f"Cedula: {atributos[0]}")
@@ -145,9 +144,9 @@ class Cita(Persona):
     #Metodo que busca el dato a eliminar y lo elimina
     def eliminar_cita(self):
         ced = input("Cedula a eliminar: ")
-        with open("yourfile.txt", "r") as f:
+        with open("citas.txt", "r") as f:
             lines = f.readlines()
-        with open("yourfile.txt", "w") as f:
+        with open("citas.txt", "w") as f:
             for line in lines:
                 if line.strip("\n") != ced:
                     f.write(line)
