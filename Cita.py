@@ -3,6 +3,7 @@ import os
 import datetime
 import time
 import calendar
+from tqdm import tqdm
 
 # Constantes
 fechaActual = datetime.datetime.now()
@@ -17,24 +18,29 @@ estaciones = ["Alajuela", "Heredia", "SJN (Sto Domingo)", "Cartago",
 vehiculos = {"Motocicleta":8010, "Automovil":12150, "Carga Liviana":12150, 
         "Carga Pesada":16015, "Bus":16015, "Taxi":13025}
         
+class Persona:
+    #Constructor
+    def __init__(self, nombre = None, apellidos = None, cedula = None,
+        correo = None, telefono = None):
+        #Atributos
+        self.nombre = nombre
+        self.apellidos = apellidos
+        self.cedula = correo
+        self.correo = cedula
+        self.telefono = telefono
 
-class Cita:
-    # Constructor
-    def __init__(self, nombre=None, apellidos=None, cedula=None, placa=None, 
-    fecha=None, hora=None, estacion=None, correo=None, telefono=None, 
-    vehiculo=None, monto=None):
-        # Trabajamos los atributos como privados
-        self._nombre = nombre
-        self._apellidos = apellidos
-        self._cedula = cedula
-        self._placa = placa
-        self._fecha = fecha
-        self._hora = hora
-        self._estacion = estacion
-        self._correo = correo
-        self._telefono = telefono
-        self._vehiculo = vehiculo
-        self._monto = monto
+class Cita(Persona):
+    def __init__(self, placa = None, fecha = None, hora = None,
+        estacion = None, vehiculo = None, monto = None):
+        super().__init__()
+        #Atributos
+        self.placa = placa
+        self.fecha = fecha
+        self.hora = hora
+        self.estacion = estacion
+        self.vehiculo = vehiculo
+        self.monto = monto
+       
 
     #Metodo para mostrar la lista estaciones.
     def mostrar_estaciones(self):
@@ -56,11 +62,11 @@ class Cita:
     #Metodo que muestra los datos de los tipos de vehiculos y sus costos
     def mostrar_vehiculosYcostos(self):
         os.system("cls")
-        print("Vehículos:")
+        print("Vehículos:")   
         # Imprimimos las key(Vehiculos) con sus valores(costo)
         for vehiculo, costo in vehiculos.items():
             print(f"{vehiculo} = c{costo}")
-    
+
     #Metodo que muestra el calendario
     def mostrar_calendario(self):
         c = calendar.TextCalendar(calendar.MONDAY)
@@ -79,11 +85,13 @@ class Cita:
         self.hora = datetime.datetime.strftime(fechaActual,"%H:%M:%S")
         self.mostrar_estaciones()
         self.elegir_estacion()
+        os.system("cls")
         self.correo = input("Correo electrónico: ")
         self.telefono = input("Teléfono: ")
         
         while True:
-            ans = input(f"Yo, {self.nombre} con cédula: {self.cedula}, autorizo el uso del número celular y/o el correo electrónico a Riteve para el envío de información referente a la revision téncnica vehícular.\n Acepta los términos? S = si | N = no : ")
+            os.system("cls")
+            ans = input(f"Yo, {self.nombre} con cédula: {self.cedula}, autorizo el uso del número celular y/o el correo electrónico a Riteve para el envío de información referente a la revision téncnica vehícular.\n\nAcepta los términos? S = si | N = no : ")
             if ans == "S" or ans == "s":
                 self.mostrar_vehiculosYcostos()
                 print("\nPor favor ingrese el nombre del vehículo tal cual como sale en pantalla.\n")
@@ -98,24 +106,26 @@ class Cita:
 
     def escribir_txt(self):
         with open("citas.txt", "a") as archivo:
-            archivo.write(f"{self.nombre};{self.apellidos};{self.cedula};{self.placa};{self.fecha};{self.hora};{self.estacion};{self.correo};{self.telefono};{self.monto}\n")
+            archivo.write(f"{self.cedula};{self.nombre};{self.apellidos};{self.placa};{self.fecha};{self.hora};{self.estacion};{self.correo};{self.telefono};{self.monto}\n")
 
-    def leer_txt(self):
-        cont = 1
+    def mostrar_citas(self):
         with open("citas.txt", "r") as archivo:
             #Readlines nos genera una lista con las lineas del archivo
             lineas = archivo.readlines()
+            #Ordenamos la lista
+            lineas.sort()
             linea = archivo.readline()
             #Por cada linea en la lista lineas
+            cont = 0
             for linea in lineas:
+                cont += 1
                 '''El metodo split nos genera un array con el separador
                 que le mandemos por parametro, en este caso ";"'''
                 atributos = linea.split(";")
-                cont = 1
-                print(f"""Cita #
-Nombre: {atributos[0]}
-Apellidos: {atributos[1]}
-Cedula: {atributos[2]}
+                print(f"""Cita #{cont}
+Cedula: {atributos[0]}
+Nombre: {atributos[1]}
+Appellidos: {atributos[2]}
 Placa: {atributos[3]}
 Fecha: {atributos[4]}
 Hora: {atributos[5]}
@@ -127,67 +137,136 @@ Monto: {atributos[9]}""")
 
     #Metodo  que nos permite modificar las citas
     def modificar_cita(self, palabra):
-        with open("citas.txt", "r") as archivo:
-            # Variables auxiliares para obtener la posicion del cursor
-            # y asi poder trabajar con los datos que nosotros queramos.
-            i = 1
-            enc = 0
-            poscamb = 0
-            pospuntero = 0
-            linea = archivo.readline()
-            tamLin = len(linea)
-            tamNombre = len(palabra)
-            while linea != "" and enc == "":
-                if linea[1:1+tamNombre+1] == palabra+";":
-                    poscamb = archivo.tell()
-                    enc = 1 
-                    pospuntero = poscamb - tamLin -1
-                else:
-                    i += 1
-                    linea = archivo.readline()
-            
-            if enc == 0:
-                print("El dato ingresado no se encuentra")
-            if enc == 1:
-                with open("citas.txt", "r+") as archivo2:
-                    if pospuntero == 1:
-                        archivo2.seek(0)
-                    else:
-                        archivo2.seek(pospuntero)
-                    for n in range(0, tamLin, 1):
-                        archivo2.write("")
+        pass
 
     #Metodo que busca el dato a eliminar y lo elimina
-    def eliminar_cita(self, palabra):
-        with open("citas.txt", "r") as archivo:
-            # Variables auxiliares para obtener la posicion del cursor
-            # y asi poder trabajar con los datos que nosotros queramos.
-            i = 1
-            enc = 0
-            poscamb = 0
-            pospuntero = 0
-            linea = archivo.readline()
-            tamLin = len(linea)
-            tamNombre = len(palabra)
-            while linea != "" and enc == "":
-                if linea[1:1 + tamNombre + 1] == palabra + ";":
-                    poscamb = archivo.tell()
-                    enc = 1
-                    pospuntero = poscamb - tamLin -1
-                else:
-                    i += 1
-                    linea = archivo.readline()
-            
-            if enc == 0:
-                print("El dato ingresado no se encuentra")
-            if enc == 1:
+    def eliminar_cita(self):
+        ced = input("Cedula a eliminar: ")
+        with open("yourfile.txt", "r") as f:
+            lines = f.readlines()
+        with open("yourfile.txt", "w") as f:
+            for line in lines:
+                if line.strip("\n") != ced:
+                    f.write(line)
 
-                with open("citas.txt", "r+") as archivo2:
-                    # Al ya posicionar el cursor donde corresponda el txt
-                    # Procedemos a reemplazar el dato por ""
-                    if pospuntero == 1:
-                        archivo2.seek(0)
-                    else:
-                        archivo2.seek(pospuntero)
-                    for n in range(0, tamLin, 1):
-                        archivo2.write("")
+
+    # Con el metodo de buscar empleado nos permitira buscar los empleados.
+    def buscar_empleado(self):
+        with open("citas.txt", "r") as file:
+            #Asignamos el texto que tenga la linea a la variable line.
+            line = file.readline()
+            cedula = input("Cedula a buscar: ")
+                #Validamos que la cedula no este vacia y que sean numeros.
+            if cedula != "" and cedula.isnumeric():
+                #Mientras la linea no este vacia nos va a recorrer las lineas del txt.
+                while line != "":
+                    '''Generaremos un array llamado atributos con los elementos
+                    separados por ";".'''
+                    atributos = line.split(";")
+                    '''Si la cedula es igual al primer elemento del array atributos
+                    (Que seria la cedula) entonces vamos a asignar los valores del 
+                    array a los atributos del objeto para que no esten en "None"'''
+                    if cedula == atributos[0]:
+                        '''Luego podremos imprimir los atributos de lo que sera la
+                        persona que buscamos con la cedula.'''
+                        print(f"""\nCedula: {atributos[0]}
+Nombre: {atributos[1]}
+Appellidos: {atributos[2]}
+Placa: {atributos[3]}
+Fecha: {atributos[4]}
+Hora: {atributos[5]}
+Estacion: {atributos[6]}
+Correo: {atributos[7]}
+Telefono: {atributos[8]}
+Monto: {atributos[9]}""")
+                    # Volvemos a llamar el metodo readline() que va a empezar a
+                    # leer desde la otra linea.
+                    line = file.readline()
+            else:
+                print("El numero de cedula digitado no se encuentra")
+
+
+#Sobrecarga de operadores para acomodar las citas
+#por el nombre alfabeticamente
+    
+    def __lt__(self, obj):
+        return self.nombre < obj.nombre
+
+    def __eq__(self, obj):
+        return self.nombre == obj.nombre
+
+    def __le__(self, obj):
+        return self < obj or self == obj
+        
+
+    #Metodo para imprimir el menu
+    def menu(self):
+        print("""1- Nueva Cita
+2- Mostrar Citas
+3- Buscar Cita
+4- Modificar Citas
+5- Eliminar Citas
+6- Salir""")
+
+def main():
+    os.system("cls")
+    print("Bienvenido al Sistema de Citas de Riteve!\n")
+
+    #Barra de carga.
+    for i in tqdm(range(10)):
+        time.sleep(0.1)
+
+    while True:       
+        os.system("cls")
+        print("==================")
+        print("#     Riteve     #")
+        print("==================\n")
+        cita = Cita()
+        cita.menu()
+        try:
+            opc = int(input("\nPor favor ingrese una opcion: "))
+        except:
+            opc = -1       
+        match opc:
+            case 1:
+                os.system("cls")
+                print("*** Nueva Cita ***")    
+                cita.nueva_cita()
+                cita.escribir_txt()
+
+            case 2:
+                os.system("cls")
+                print("*** Mostrar Citas ***\n")
+                cita.mostrar_citas()
+                input("\nPresione Enter para continuar...")
+
+            case 3:
+                os.system("cls")
+                print("*** Buscar Cita ***\n")
+                cita.buscar_empleado()
+                input("\nPresione Enter para continuar...")
+
+            case 4:
+                os.system("cls")
+                print("*** Modificar Citas ***")
+                cita.mostrar_citas()
+                cita.modificar_cita()             
+                input("Presione Enter para continuar...")
+
+            case 5:
+                os.system("cls")
+                print("*** Eliminar Citas ***")
+                cita.eliminar_cita("Brandon")
+                input("Presione Enter para continuar...")
+
+            case 6:
+                print("Hasta luego!")
+                time.sleep(1)
+                break
+            
+            case _:
+                print("Ingrese una opción valida.")
+                input("Presione Enter para continuar...")
+    
+if __name__ == "__main__":
+    main()
