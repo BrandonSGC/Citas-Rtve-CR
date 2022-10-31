@@ -104,9 +104,11 @@ class Cita(Persona):
                 time.sleep(1.4) 
         input("Presione enter para continuar...")
 
+
     def escribir_txt(self):
         with open("citas.txt", "a") as archivo:
             archivo.write(f"{self.cedula};{self.nombre};{self.apellidos};{self.placa};{self.fecha};{self.hora};{self.estacion};{self.correo};{self.telefono};{self.monto}\n")
+
 
     def mostrar_citas(self):
         with open("citas.txt", "r") as archivo:
@@ -120,24 +122,25 @@ class Cita(Persona):
             for linea in lineas:
                 cont += 1
                 '''El metodo split nos genera un array con el separador
-                que le mandemos por parametro, en este caso ";"'''
+                que le mandemos por parametro, en este caso ";" '''
                 atributos = linea.split(";")
-                print(f"""Cita #{cont}
-Cedula: {atributos[0]}
-Nombre: {atributos[1]}
-Appellidos: {atributos[2]}
-Placa: {atributos[3]}
-Fecha: {atributos[4]}
-Hora: {atributos[5]}
-Estacion: {atributos[6]}
-Correo: {atributos[7]}
-Telefono: {atributos[8]}
-Monto: {atributos[9]}""")
+                print(f"Cita #{cont}")
+                print(f"Cedula: {atributos[0]}")
+                print(f"Nombre: {atributos[1]}")
+                print(f"Apellidos: {atributos[2]}")
+                print(f"Placa: {atributos[3]}")
+                print(f"Fecha: {atributos[4]}")
+                print(f"Hora: {atributos[5]}")
+                print(f"Estacion: {atributos[6]}")
+                print(f"Correo: {atributos[7]}")
+                print(f"Monto: {atributos[9]}")
+
 
 
     #Metodo  que nos permite modificar las citas
     def modificar_cita(self, palabra):
         pass
+
 
     #Metodo que busca el dato a eliminar y lo elimina
     def eliminar_cita(self):
@@ -169,16 +172,15 @@ Monto: {atributos[9]}""")
                     if cedula == atributos[0]:
                         '''Luego podremos imprimir los atributos de lo que sera la
                         persona que buscamos con la cedula.'''
-                        print(f"""\nCedula: {atributos[0]}
-Nombre: {atributos[1]}
-Appellidos: {atributos[2]}
-Placa: {atributos[3]}
-Fecha: {atributos[4]}
-Hora: {atributos[5]}
-Estacion: {atributos[6]}
-Correo: {atributos[7]}
-Telefono: {atributos[8]}
-Monto: {atributos[9]}""")
+                        print(f"\nCedula: {atributos[0]}")
+                        print(f"Nombre: {atributos[1]}")
+                        print(f"Apellidos: {atributos[2]}")
+                        print(f"Placa: {atributos[3]}")
+                        print(f"Fecha: {atributos[4]}")
+                        print(f"Hora: {atributos[5]}")
+                        print(f"Estacion: {atributos[6]}")
+                        print(f"Correo: {atributos[7]}")
+                        print(f"Monto: {atributos[9]}")
                     # Volvemos a llamar el metodo readline() que va a empezar a
                     # leer desde la otra linea.
                     line = file.readline()
