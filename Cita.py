@@ -173,10 +173,16 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
 
 
     #Metodo que nos permite modificar las citas
-    def modificar_cita(self, palabra):
-        pass
-
+    def modificar_cita(self):
+        with open('citas.txt', 'r') as file:
+            data = file.readlines()
+        print(data)
+        data[1] = "Here is my modified Line 2\n"
+        
+        with open('citas.txt', 'w') as file:
+            file.writelines(data)
     
+
     #Metodo para eliminar
     def otro_eliminar(self):
         with open("citas.txt", "r") as f:
