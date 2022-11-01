@@ -14,7 +14,7 @@ estaciones = ["Alajuela", "Heredia", "SJN (Sto Domingo)", "Cartago",
         "Movil Norte", "Movil Central"]
 
 # Diccionario de Vehiculos con sus respectivos costos
-vehiculos = {"Motocicleta":8010, "Automovil":12150, "Carga Liviana":12150, 
+vehiculos = {"Motocicleta":8010, "Automóvil":12150, "Carga Liviana":12150, 
         "Carga Pesada":16015, "Bus":16015, "Taxi":13025}
         
 class Persona:
@@ -49,7 +49,7 @@ class Cita(Persona):
     #Metodo para elegir la estacion de la lista estaciones.
     def elegir_estacion(self):
         try:
-            opc = int(input("Ingrese el numero de estación: "))
+            opc = int(input("Ingrese el número de estación: "))
             self.estacion = estaciones[opc-1]
         except:
             opc = -1
@@ -88,7 +88,9 @@ class Cita(Persona):
         
         while True:
             os.system("cls")
-            ans = input(f"Yo, {self.nombre} con cédula: {self.cedula}, autorizo el uso del número celular y/o el correo electrónico a Riteve para el envío de información referente a la revision téncnica vehícular.\n\nAcepta los términos? S = si | N = no : ")
+            ans = input(f"Yo, {self.nombre} con cédula: {self.cedula}, autorizo el \
+uso del número celular y/o el correo electrónico a Riteve para el envío de información \
+referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si | N = no : ")
             if ans == "S" or ans == "s":
                 self.mostrar_vehiculosYcostos()
                 print("\nPor favor ingrese el nombre del vehículo tal cual como sale en pantalla.\n")
@@ -97,7 +99,7 @@ class Cita(Persona):
                 break
             else:
                 os.system("cls")
-                print(f"Debe aceptar los terminos para continuar.")   
+                print(f"Debe aceptar los términos para continuar.")   
                 input("'nPresione enter para continuar...")
         input("Presione enter para continuar...")
 
@@ -124,35 +126,18 @@ class Cita(Persona):
                 #Creamos lista con el metodo split().
                 atributos = linea.split(";")
                 print(f"Cita #{cont}")
-                print(f"Cedula: {atributos[0]}")
+                print(f"Cédula: {atributos[0]}")
                 print(f"Nombre: {atributos[1]}")
                 print(f"Apellidos: {atributos[2]}")
                 print(f"Placa: {atributos[3]}")
                 print(f"Fecha: {atributos[4]}")
                 print(f"Hora: {atributos[5]}")
-                print(f"Estacion: {atributos[6]}")
+                print(f"Estación: {atributos[6]}")
                 print(f"Correo: {atributos[7]}")
                 print(f"Monto: {atributos[9]}")
 
 
-
-    #Metodo  que nos permite modificar las citas
-    def modificar_cita(self, palabra):
-        pass
-
-
-    #Metodo que busca el dato a eliminar y lo elimina
-    def eliminar_cita(self):
-        ced = input("Cedula a eliminar: ")
-        with open("citas.txt", "r") as f:
-            lines = f.readlines()
-        with open("citas.txt", "w") as f:
-            for line in lines:
-                if line.strip("\n") != ced:
-                    f.write(line)
-
-
-    # Con el metodo de buscar empleado nos permitira buscar los empleados.
+     # Con el metodo de buscar empleado nos permitira buscar los empleados.
     def buscar_empleado(self):
         with open("citas.txt", "r") as file:
             #Asignamos el texto que tenga la linea a la variable line.
@@ -177,19 +162,33 @@ class Cita(Persona):
                         print(f"Placa: {atributos[3]}")
                         print(f"Fecha: {atributos[4]}")
                         print(f"Hora: {atributos[5]}")
-                        print(f"Estacion: {atributos[6]}")
+                        print(f"Estación: {atributos[6]}")
                         print(f"Correo: {atributos[7]}")
                         print(f"Monto: {atributos[9]}")
                     # Volvemos a llamar el metodo readline() que va a empezar a
                     # leer desde la otra linea.
                     line = file.readline()
             else:
-                print("El numero de cedula digitado no se encuentra")
+                print("El número de cédula no se ha encontrado")
 
 
-#Sobrecarga de operadores para acomodar las citas
-#por el nombre alfabeticamente
+    #Metodo que nos permite modificar las citas
+    def modificar_cita(self, palabra):
+        pass
+
     
+    #Metodo para eliminar
+    def otro_eliminar(self):
+        with open("citas.txt", "r") as f:
+            lines = f.readlines()
+        with open("citas.txt", "w") as f:
+            for line in lines:
+                if line.strip("\n") != "288372321;Ana;Bermudez Rojas;APB512;2022-10-31;16:31:21;Nicoya;anapaulin@gmail.com;86866437;8010":
+                    f.write(line)
+
+
+    #Sobrecarga de operadores para acomodar las citas
+    #por el nombre alfabeticamente
     def __lt__(self, obj):
         return self.nombre < obj.nombre
 
@@ -224,8 +223,9 @@ def main():
         print("==================\n")
         cita = Cita()
         cita.menu()
+
         try:
-            opc = int(input("\nPor favor ingrese una opcion: "))
+            opc = int(input("\nPor favor ingrese una opción: "))
         except:
             opc = -1       
         match opc:
@@ -250,14 +250,14 @@ def main():
             case 4:
                 os.system("cls")
                 print("*** Modificar Citas ***")
-                cita.mostrar_citas()
-                cita.modificar_cita()             
+
                 input("Presione Enter para continuar...")
 
             case 5:
                 os.system("cls")
                 print("*** Eliminar Citas ***")
-                cita.eliminar_cita("Brandon")
+                #cita.eliminar_cita()
+                cita.otro_eliminar()
                 input("Presione Enter para continuar...")
 
             case 6:
