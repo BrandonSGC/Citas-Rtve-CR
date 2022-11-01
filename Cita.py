@@ -183,14 +183,28 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
             file.writelines(data)
     
 
-    #Metodo para eliminar
-    def otro_eliminar(self):
+    def eliminar_cita(self):
         with open("citas.txt", "r") as f:
             lines = f.readlines()
         with open("citas.txt", "w") as f:
             for line in lines:
                 if line.strip("\n") != "288372321;Ana;Bermudez Rojas;APB512;2022-10-31;16:31:21;Nicoya;anapaulin@gmail.com;86866437;8010":
                     f.write(line)
+
+    #Metodo para eliminar
+    def otro_eliminar(self):
+        with open("citas.txt", "r") as f:
+            lines = f.readlines()
+        with open("citas.txt", "w") as f:
+            ced = input("cedula a eliminar: ")
+            for line in lines:
+                atributos = line.split(';')
+                if atributos[0] == ced:
+                    toDelete = str(f"{atributos[0]};{atributos[1]};{atributos[2]};{atributos[3]};{atributos[4]};{atributos[5]};{atributos[6]};{atributos[7]};{atributos[9]}")
+                    toDelete = toDelete.strip("\n")
+                    if line.strip("\n") != str(toDelete):
+                        f.write(line)
+                        print(f"La cita se ha eliminado correctamente.")
 
 
     #Sobrecarga de operadores para acomodar las citas
@@ -262,8 +276,8 @@ def main():
             case 5:
                 os.system("cls")
                 print("*** Eliminar Citas ***")
-                #cita.eliminar_cita()
-                cita.otro_eliminar()
+                cita.eliminar_cita()
+                #cita.otro_eliminar()
                 input("Presione Enter para continuar...")
 
             case 6:
