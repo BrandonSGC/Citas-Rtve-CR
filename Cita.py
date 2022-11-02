@@ -64,12 +64,22 @@ class Cita(Persona):
             print(f"{vehiculo} = c{costo}")
 
 
-    # Metodo que muestra el calendario
-    def mostrar_calendario(self):
-        c = calendar.TextCalendar(calendar.MONDAY)
-        str = c.formatmonth(2022,10)
-        print(str)
+    def elegir_fecha(self):
+        print("Ingrese la fecha de la cita: ")
+        anio = fechaActual.year
+        print(f"Año: {anio}")
+        mes = input("Mes: ")
+        dia = input("Día: ")
+        return f"{anio}/{mes}/{dia}"
 
+    def elegir_hora(self):
+        horas = ["8:00am","9:00am","10:00am","11:00am","12:00pm",
+        "1:00pm","2:00pm","3:00pm","4:00pm","5:00pm","6:00pm"]
+        for i in range(len(horas)):
+            print(f"{i}- {horas[i]}")        
+        opc = int(input("Opcion: "))
+        hora = horas[opc-1]
+        return str(hora)
     
     # Metodo para crear una cita
     def nueva_cita(self):
@@ -77,9 +87,8 @@ class Cita(Persona):
         self.apellidos = input("Apellidos: ")
         self.cedula = input("Cédula: ")
         self.placa = input("Placa Vehículo: ")
-        self.mostrar_calendario()
-        self.fecha = datetime.datetime.now().date()
-        self.hora = datetime.datetime.strftime(fechaActual,"%H:%M:%S")
+        self.fecha = self.elegir_fecha()
+        self.hora = self.elegir_hora()
         self.mostrar_estaciones()
         self.elegir_estacion()
         os.system("cls")
@@ -134,7 +143,7 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
                 print(f"Hora: {atributos[5]}")
                 print(f"Estación: {atributos[6]}")
                 print(f"Correo: {atributos[7]}")
-                print(f"Monto: {atributos[9]}")
+                print(f"Monto: ₡{atributos[9]}")
 
 
      # Con el metodo de buscar empleado nos permitira buscar los empleados.
