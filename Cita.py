@@ -7,7 +7,7 @@ from tqdm import tqdm
 # Constantes
 fechaActual = datetime.datetime.now()
 
-#Lista de estaciones disponibles
+# Lista de estaciones disponibles
 estaciones = ["Alajuela", "Heredia", "SJN (Sto Domingo)", "Cartago",
         "SJO (Alajuelita)", "Perez Zeledon", "San Carlos", "Puntarenas", 
         "Guapiles", "Nicoya", "Movil Sur", "Movil 4", "Liberia", "Cañas", 
@@ -38,7 +38,7 @@ class Cita(Persona):
         self.monto = monto
        
 
-    #Metodo para mostrar la lista estaciones.
+    # Metodo para mostrar la lista estaciones.
     def mostrar_estaciones(self):
         os.system("cls")
         print("Estaciones: ")
@@ -46,7 +46,7 @@ class Cita(Persona):
             print(f"{i + 1}- {estaciones[i]}")
 
     
-    #Metodo para elegir la estacion de la lista estaciones.
+    # Metodo para elegir la estacion de la lista estaciones.
     def elegir_estacion(self):
         try:
             opc = int(input("Ingrese el número de estación: "))
@@ -55,7 +55,7 @@ class Cita(Persona):
             opc = -1
 
 
-    #Metodo que muestra los datos de los tipos de vehiculos y sus costos
+    # Metodo que muestra los datos de los tipos de vehiculos y sus costos
     def mostrar_vehiculosYcostos(self):
         os.system("cls")
         print("Vehículos:")   
@@ -64,14 +64,14 @@ class Cita(Persona):
             print(f"{vehiculo} = c{costo}")
 
 
-    #Metodo que muestra el calendario
+    # Metodo que muestra el calendario
     def mostrar_calendario(self):
         c = calendar.TextCalendar(calendar.MONDAY)
         str = c.formatmonth(2022,10)
         print(str)
 
     
-    #Metodo para crear una cita
+    # Metodo para crear una cita
     def nueva_cita(self):
         self.nombre = input("Nombre: ")
         self.apellidos = input("Apellidos: ")
@@ -95,7 +95,7 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
                 self.mostrar_vehiculosYcostos()
                 print("\nPor favor ingrese el nombre del vehículo tal cual como sale en pantalla.\n")
                 self.vehiculo = input("Vehículo: ")
-                self.monto = vehiculos.get(str(self.vehiculo)) #Obtenemos valor de la key
+                self.monto = vehiculos.get(str(self.vehiculo)) # Obtenemos valor de la key
                 break
             else:
                 os.system("cls")
@@ -113,17 +113,17 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
 
     def mostrar_citas(self):
         with open("citas.txt", "r") as archivo:
-            #Generamos una lista con las lineas del archivo con
+            # Generamos una lista con las lineas del archivo con
             # el metodo readlines(),
             lineas = archivo.readlines()
-            #Ordenamos la lista
+            # Ordenamos la lista
             lineas.sort()
             linea = archivo.readline()
             cont = 0
-            #Por cada linea en la lista lineas
+            # Por cada linea en la lista lineas
             for linea in lineas:
                 cont += 1
-                #Creamos lista con el metodo split().
+                # Creamos lista con el metodo split().
                 atributos = linea.split(";")
                 print(f"Cita #{cont}")
                 print(f"Cédula: {atributos[0]}")
@@ -140,12 +140,12 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
      # Con el metodo de buscar empleado nos permitira buscar los empleados.
     def buscar_empleado(self):
         with open("citas.txt", "r") as file:
-            #Asignamos el texto que tenga la linea a la variable line.
+            # Asignamos el texto que tenga la linea a la variable line.
             line = file.readline()
             cedula = input("Cedula a buscar: ")
-                #Validamos que la cedula no este vacia y que sean numeros.
+                # Validamos que la cedula no este vacia y que sean numeros.
             if cedula != "" and cedula.isnumeric():
-                #Mientras la linea no este vacia nos va a recorrer las lineas del txt.
+                # Mientras la linea no este vacia nos va a recorrer las lineas del txt.
                 while line != "":
                     '''Generaremos un array llamado atributos con los elementos
                     separados por ";".'''
@@ -172,7 +172,7 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
                 print("El número de cédula no se ha encontrado")
 
 
-    #Metodo que nos permite modificar las citas
+    # Metodo que nos permite modificar las citas
     def modificar_cita(self):
         with open('citas.txt', 'r') as file:
             data = file.readlines()
@@ -183,7 +183,7 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
             file.writelines(data)
     
 
-    #Metodo para eliminar
+    # Metodo para eliminar
     def eliminar_cita(self):
         with open("citas.txt", "r") as f:
             lines = f.readlines()
@@ -200,10 +200,8 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
             print(f"La cita se ha eliminado correctamente.")
             
                     
-
-
-    #Sobrecarga de operadores para acomodar las citas
-    #por el nombre alfabeticamente
+    # Sobrecarga de operadores para acomodar las citas
+    # por el nombre alfabeticamente
     def __lt__(self, obj):
         return self.nombre < obj.nombre
 
@@ -214,7 +212,7 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
         return self < obj or self == obj
         
 
-    #Metodo para imprimir el menu
+    # Metodo para imprimir el menu
     def menu(self):
         print("""1- Nueva Cita
 2- Mostrar Citas
@@ -227,7 +225,7 @@ def main():
     os.system("cls")
     print("Bienvenido al Sistema de Citas de Riteve!\n")
 
-    #Barra de carga.
+    # Barra de carga.
     for i in tqdm(range(10)):
         time.sleep(0.1)
 
