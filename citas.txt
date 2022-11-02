@@ -1,5 +1,6 @@
-123456789;Fernando;Moreno Jimenes;KKS213;2022-10-31;16:11:03;Alajuela;fercho@hotmail.com;88992003;13025
-288372321;Ana;Bermudez Rojas;APB512;2022-10-31;16:31:21;Nicoya;anapaulin@gmail.com;86866437;8010
-117970823;Brandon;Gomez Carvajal;BGC020;2022-10-31;16:01:53;SJO (Alajuelita);bransti20@gmail.com;70428451;12150
-123821232;Carlos;Gomez Badilla;MAX099;2022-11-01;19:03:23;Liberia;cargb11@gmail.com;88248009;12150
-182327232;Maria;Carvajal Ramirez;ACC221;2022-11-01;19:03:23;San Carlos;maryb.k@hotmail.com;86760010;12150
+123456789;Fernando;Moreno Jimenes;KKS213;2022/10/;2:00pm;Alajuela;fercho@hotmail.com;88992003;13025
+288372321;Ana;Bermudez Rojas;APB512;2022/10/31;7:00am;Nicoya;anapaulin@gmail.com;86866437;8010
+117970823;Brandon;Gomez Carvajal;BGC020;2022/10/31;2:00pm;SJO (Alajuelita);bransti20@gmail.com;70428451;12150
+123821232;Carlos;Gomez Badilla;MAX099;2022/11/01;1:00pm;Liberia;cargb11@gmail.com;88248009;12150
+182327232;Maria;Carvajal Ramirez;ACC221;2022/11/01;3:00pm;San Carlos;maryb.k@hotmail.com;86760010;12150
+123325294;Pepito;Jimenez Garcia;9923522;2022/12/20;5:00pm;Cartago;pepito155@gmail.com;87723321;16015
