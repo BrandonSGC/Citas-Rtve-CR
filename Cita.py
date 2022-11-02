@@ -143,7 +143,11 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
                 print(f"Hora: {atributos[5]}")
                 print(f"Estación: {atributos[6]}")
                 print(f"Correo: {atributos[7]}")
-                print(f"Monto: ₡{atributos[9]}")
+                # Creamos linea separadora
+                monto = atributos[9]
+                monto = monto.strip("\n")
+                print(f"Monto: ₡{monto}")
+                print("-"*30)
 
 
      # Con el metodo de buscar empleado nos permitira buscar los empleados.
