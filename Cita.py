@@ -203,7 +203,7 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
                     print(f"Cita encontrada.")
         with open("citas.txt", "w") as f:
             for line in lines:
-                if line.strip("\n") != str(toDelete):
+                if line.strip("\n") != toDelete.strip("\n"):
                     f.write(line)
             print(f"La cita se ha eliminado correctamente.")
             
