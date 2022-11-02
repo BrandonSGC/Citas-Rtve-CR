@@ -183,16 +183,8 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
             file.writelines(data)
     
 
-    def eliminar_cita(self):
-        with open("citas.txt", "r") as f:
-            lines = f.readlines()
-        with open("citas.txt", "w") as f:
-            for line in lines:
-                if line.strip("\n") != "288372321;Ana;Bermudez Rojas;APB512;2022-10-31;16:31:21;Nicoya;anapaulin@gmail.com;86866437;8010":
-                    f.write(line)
-
     #Metodo para eliminar
-    def otro_eliminar(self):
+    def eliminar_cita(self):
         with open("citas.txt", "r") as f:
             lines = f.readlines()
             ced = input("cedula a eliminar: ")
@@ -273,14 +265,13 @@ def main():
             case 4:
                 os.system("cls")
                 print("*** Modificar Citas ***")
-
+                cita.modificar_cita()
                 input("Presione Enter para continuar...")
 
             case 5:
                 os.system("cls")
                 print("*** Eliminar Citas ***")
-                #cita.eliminar_cita()
-                cita.otro_eliminar()
+                cita.eliminar_cita()
                 input("Presione Enter para continuar...")
 
             case 6:
