@@ -177,15 +177,15 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
                         print(f"Estación: {atributos[6]}")
                         print(f"Correo: {atributos[7]}")
                         print(f"Monto: {atributos[9]}")
-                        self.cedula == atributos[0]
-                        self.nombre == atributos[1]
-                        self.apellidos == atributos[2]
-                        self.placa == atributos[3]
-                        self.fecha == atributos[4]
-                        self.hora == atributos[5]
-                        self.estacion == atributos[6]
-                        self.correo == atributos[7]
-                        self.monto == int(atributos[9].strip("\n"))
+                        self.cedula = atributos[0]
+                        self.nombre = atributos[1]
+                        self.apellidos = atributos[2]
+                        self.placa = atributos[3]
+                        self.fecha = atributos[4]
+                        self.hora = atributos[5]
+                        self.estacion = atributos[6]
+                        self.correo = atributos[7]
+                        self.monto = int(atributos[9].strip("\n"))
                     # Volvemos a llamar el metodo readline() que va a empezar a
                     # leer desde la otra linea.
                     line = file.readline()
@@ -219,9 +219,18 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
                 if line.strip("\n") != toDelete.strip("\n"):
                     f.write(line)
             print(f"La cita se ha eliminado correctamente.")
-            
+
+
+    # Sobrecarga de Operadores para comparar costos
     def __lt__(self, other):
         return self.monto < other.monto
+
+    def __eq__(self, other):
+        return self.monto == other.monto
+
+    def __lt__(self, other):
+        return self.monto > other.monto
+
 
     # Metodo para imprimir el menu
     def menu(self):
@@ -249,7 +258,6 @@ def main():
         cita = Cita()
         cita2 = Cita()
         cita.menu()
-
         try:
             opc = int(input("\nPor favor ingrese una opción: "))
         except:
@@ -290,10 +298,13 @@ def main():
                 print("*** Comparar Costos ***")
                 cita.buscar_cita()
                 cita2.buscar_cita()
+
                 if cita < cita2:
-                    print(f"cita2 es mayor")
+                    print(f"La primera cita es mayor.")
+                elif cita > cita2:
+                    print(f"La segunda cita es mayor")
                 else:
-                    print(f"cita1 es mayor")
+                    print("Las citas tienen el mismo costo.")
 
                 input("Presione Enter para continuar...")
 
