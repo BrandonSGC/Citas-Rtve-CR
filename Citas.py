@@ -1,7 +1,6 @@
 import os
 import datetime
 import time
-import calendar
 from tqdm import tqdm
 
 # Constantes
@@ -28,14 +27,14 @@ class Persona:
 
 class Cita(Persona):
     def __init__(self, placa = None, fecha = None, hora = None,
-        estacion = None, vehiculo = None, monto = None):
+        estacion = None, vehiculo = None):
         super().__init__()
         self.placa = placa
         self.fecha = fecha
         self.hora = hora
         self.estacion = estacion
         self.vehiculo = vehiculo
-        self.monto = monto
+        self.monto = 0
        
 
     # Metodo para mostrar la lista estaciones.
@@ -151,7 +150,7 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
 
 
      # Con el metodo de buscar empleado nos permitira buscar los empleados.
-    def buscar_empleado(self):
+    def buscar_cita(self):
         with open("citas.txt", "r") as file:
             # Asignamos el texto que tenga la linea a la variable line.
             line = file.readline()
@@ -178,6 +177,15 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
                         print(f"Estación: {atributos[6]}")
                         print(f"Correo: {atributos[7]}")
                         print(f"Monto: {atributos[9]}")
+                        self.cedula == atributos[0]
+                        self.nombre == atributos[1]
+                        self.apellidos == atributos[2]
+                        self.placa == atributos[3]
+                        self.fecha == atributos[4]
+                        self.hora == atributos[5]
+                        self.estacion == atributos[6]
+                        self.correo == atributos[7]
+                        self.monto == int(atributos[9].strip("\n"))
                     # Volvemos a llamar el metodo readline() que va a empezar a
                     # leer desde la otra linea.
                     line = file.readline()
@@ -212,18 +220,8 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
                     f.write(line)
             print(f"La cita se ha eliminado correctamente.")
             
-                    
-    # Sobrecarga de operadores para acomodar las citas
-    # por el nombre alfabeticamente
-    def __lt__(self, obj):
-        return self.nombre < obj.nombre
-
-    def __eq__(self, obj):
-        return self.nombre == obj.nombre
-
-    def __le__(self, obj):
-        return self < obj or self == obj
-        
+    def __lt__(self, other):
+        return self.monto < other.monto
 
     # Metodo para imprimir el menu
     def menu(self):
@@ -232,7 +230,8 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
 3- Buscar Cita
 4- Modificar Citas
 5- Eliminar Citas
-6- Salir""")
+6- Comparar Costos
+7- Salir""")
 
 def main():
     os.system("cls")
@@ -248,6 +247,7 @@ def main():
         print("#     Riteve     #")
         print("==================\n")
         cita = Cita()
+        cita2 = Cita()
         cita.menu()
 
         try:
@@ -270,7 +270,7 @@ def main():
             case 3:
                 os.system("cls")
                 print("*** Buscar Cita ***\n")
-                cita.buscar_empleado()
+                cita.buscar_cita()
                 input("\nPresione Enter para continuar...")
 
             case 4:
@@ -286,8 +286,19 @@ def main():
                 input("Presione Enter para continuar...")
 
             case 6:
+                os.system("cls")
+                print("*** Comparar Costos ***")
+                cita.buscar_cita()
+                cita2.buscar_cita()
+                if cita < cita2:
+                    print(f"cita2 es mayor")
+                else:
+                    print(f"cita1 es mayor")
+
+                input("Presione Enter para continuar...")
+
+            case 7:
                 print("Hasta luego!")
-                time.sleep(1)
                 break
             
             case _:
