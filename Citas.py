@@ -221,7 +221,7 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
             print(f"La cita se ha eliminado correctamente.")
 
 
-    # Sobrecarga de Operadores para comparar costos
+    # Sobrecarga de Operadores para comparar costos de citas
     def __lt__(self, other):
         return self.monto < other.monto
 
