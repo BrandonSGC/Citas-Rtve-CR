@@ -2,8 +2,12 @@ import os
 import datetime
 import time
 from tqdm import tqdm
+# Biblioteca para leer por voz
+import pyttsx3
 
 # Constantes
+#Instanciamos el objeto de voz
+voice = pyttsx3.init()
 fechaActual = datetime.datetime.now()
 
 # Lista de estaciones disponibles
@@ -147,6 +151,11 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
                 monto = monto.strip("\n")
                 print(f"Monto: ₡{monto}")
                 print("-"*30)
+
+                # Nos va a leer los atributos de las citas
+                for i in range(len(atributos)):
+                    voice.say(atributos[i])
+                    voice.runAndWait()
 
 
      # Con el metodo de buscar empleado nos permitira buscar los empleados.
