@@ -150,10 +150,6 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
                 print(f"Monto: ₡{monto}")
                 print("-"*30)
 
-                # Nos va a leer los atributos de las citas
-                for i in range(len(atributos)):
-                    voice.say(atributos[i])
-                    voice.runAndWait()
 
 
      # Con el metodo de buscar empleado nos permitira buscar los empleados.
@@ -202,13 +198,26 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
 
     # Metodo que nos permite modificar las citas
     def modificar_cita(self):
+        ced = input("Cedula a modificar? ")
         with open('citas.txt', 'r') as file:
-            data = file.readlines()
-        print(data)
-        data[1] = "Here is my modified Line 2\n"
-        
+            lines = file.readlines()
+            line = file.readline()
+            cont = 0
+            for line in lines:
+                cont += 1
+                atributos = line.split(";")
+                if ced == atributos[0]: 
+                    print("Encontrado")
+                    for i in range(len(atributos)):
+                        print(f"{i+1}- {atributos[i]}")
+                    opc = int(input("Que desea modificar? "))
+                    atributos[opc-1] = print(f"Antes: {atributos[opc-1]}")
+                    atributos[opc-1] = input("Ahora: ")
+                    newLine = str(f"{atributos[0]};{atributos[1]};{atributos[2]};{atributos[3]};{atributos[4]};{atributos[5]};{atributos[6]};{atributos[7]};{atributos[8]};{atributos[9]}")
+                    break
+        lines[cont-1] = f"{newLine}"
         with open('citas.txt', 'w') as file:
-            file.writelines(data)
+            file.writelines(lines)
     
 
     # Metodo para eliminar
@@ -247,7 +256,9 @@ referente a la revisión téncnica vehícular.\n\nAcepta los términos? S = si |
 4- Modificar Citas
 5- Eliminar Citas
 6- Comparar Costos
-7- Salir""")
+7- Salir"""
+)
+
 
 def main():
     os.system("cls")
@@ -262,9 +273,12 @@ def main():
         print("==================")
         print("#     Riteve     #")
         print("==================\n")
+        # lE DAMOS LA BIENVENIDA AL USUARIO POR VOZ
         cita = Cita()
         cita2 = Cita()
         cita.menu()
+        voice.say("Bienvenido al Sistema de citas de Riteve")
+        voice.runAndWait()
         try:
             opc = int(input("\nPor favor ingrese una opción: "))
         except:
@@ -316,7 +330,10 @@ def main():
                 input("Presione Enter para continuar...")
 
             case 7:
+                os.system("cls")
                 print("Hasta luego!")
+                voice.say("Hasta luego!")
+                voice.runAndWait()
                 break
             
             case _:
