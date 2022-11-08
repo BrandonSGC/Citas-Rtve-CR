@@ -273,10 +273,10 @@ def main():
         print("==================")
         print("#     Riteve     #")
         print("==================\n")
-        # lE DAMOS LA BIENVENIDA AL USUARIO POR VOZ
         cita = Cita()
         cita2 = Cita()
         cita.menu()
+        # Le damos la bienvenida al usuario por voz (agringada)
         voice.say("Bienvenido al Sistema de citas de Riteve")
         voice.runAndWait()
         try:
