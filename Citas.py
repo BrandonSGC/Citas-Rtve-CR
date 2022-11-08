@@ -2,12 +2,10 @@ import os
 import datetime
 import time
 from tqdm import tqdm
-# Biblioteca para leer por voz
-import pyttsx3
+import pyttsx3 # Biblioteca para leer por voz
 
 # Constantes
-#Instanciamos el objeto de voz
-voice = pyttsx3.init()
+voice = pyttsx3.init() #Instanciamos el objeto de voz
 fechaActual = datetime.datetime.now()
 
 # Lista de estaciones disponibles
