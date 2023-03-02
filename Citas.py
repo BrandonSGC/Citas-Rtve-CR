@@ -1,11 +1,8 @@
 import os
 import datetime
 import time
-from tqdm import tqdm
-import pyttsx3 # Biblioteca para leer por voz
 
 # Constantes
-voice = pyttsx3.init() #Instanciamos el objeto de voz
 fechaActual = datetime.datetime.now()
 
 # Lista de estaciones disponibles
@@ -264,10 +261,6 @@ def main():
     os.system("cls")
     print("Bienvenido al Sistema de Citas de Riteve!\n")
 
-    # Barra de carga.
-    for i in tqdm(range(10)):
-        time.sleep(0.1)
-
     while True:       
         os.system("cls")
         print("==================")
@@ -277,8 +270,6 @@ def main():
         cita2 = Cita()
         cita.menu()
         # Le damos la bienvenida al usuario por voz (agringada)
-        voice.say("Bienvenido al Sistema de citas de Riteve")
-        voice.runAndWait()
         try:
             opc = int(input("\nPor favor ingrese una opción: "))
         except:
@@ -332,8 +323,6 @@ def main():
             case 7:
                 os.system("cls")
                 print("Hasta luego!")
-                voice.say("Hasta luego!")
-                voice.runAndWait()
                 break
             
             case _:
